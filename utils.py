@@ -6,9 +6,10 @@ import numpy as np
 import os
 
 
-def plot_data(f1_coors, f2_coors, f3_coors, f1_interface_coors, f2_interface_coors, boundary_coors):
+def plot_data(f1_coors, f2_coors, f3_coors, f1_interface_coors, f2_interface_coors, boundary_coors, fig_folder):
     # Plot the training data
     fig = plt.figure()
+    title = 'training_data'
     ax = fig.add_subplot(111)
     ax.scatter(f1_coors[:, 0], f1_coors[:, 1],
                c='r', marker='o', label='$f_1$')
@@ -25,8 +26,9 @@ def plot_data(f1_coors, f2_coors, f3_coors, f1_interface_coors, f2_interface_coo
     ax.legend()
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
-    ax.set_title('Training data')
-    plt.show()
+    ax.set_title(title)
+    fig.set_size_inches(w=9, h=7)
+    plt.savefig(os.path.join(fig_folder, title+'.png'))
 
 
 def plot_losses(training_config, all_losses, fig_folder):
@@ -40,7 +42,7 @@ def plot_losses(training_config, all_losses, fig_folder):
     plt.plot(range(1, training_config["epochs"]+1, 1), boundary_losses,
              'kx', linewidth=1, label='Boundary')
     plt.plot(range(1, training_config["epochs"]+1, 1), losses_1,
-             'ro', linewidth=1, label='Sub-Net1')
+             'r-', linewidth=1, label='Sub-Net1')
     plt.plot(range(1, training_config["epochs"]+1, 1), losses_2,
              'b-.', linewidth=1, label='Sub-Net2')
     plt.plot(range(1, training_config["epochs"]+1, 1), losses_3,
@@ -50,6 +52,7 @@ def plot_losses(training_config, all_losses, fig_folder):
     plt.yscale('log')
     plt.legend(loc='upper right')
     plt.title(title)
+    fig.set_size_inches(w=9, h=7)
     plt.savefig(os.path.join(fig_folder, title+'.png'))
 
 
@@ -68,6 +71,7 @@ def plot_l2_error(training_config, all_l2_errors, fig_folder):
     plt.yscale('log')
     plt.legend(loc='upper right')
     plt.title(title)
+    fig.set_size_inches(w=9, h=7)
     plt.savefig(os.path.join(fig_folder, title+'.png'))
 
 
