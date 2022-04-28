@@ -40,14 +40,14 @@ Results of XPINNS after training on Poisson Equation f = x + y.
 </p>
 
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/exact_solution.png" alt="exact solution" height="750" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/exact_solution.png" alt="exact solution" height="650" width="700"/>
 <div>
 <br />          
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/predicted_solution.png" alt="predicted solution" height="750" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/predicted_solution.png" alt="predicted solution" height="650" width="700"/>
 <div>
 <br />          
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/point_wise_error.png" alt="point-wise error" height="750" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/point_wise_error.png" alt="point-wise error" height="650" width="700"/>
 <div>
 
