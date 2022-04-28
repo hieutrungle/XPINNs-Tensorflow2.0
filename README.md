@@ -1,4 +1,4 @@
-# Unofficial Implementation of Extended physics-informed neural networks (XPINNs) : A generalized space-time domain decomposition based deep learning framework for nonlinear partial differential equations
+# Unofficial Implementation of Extended physics-informed neural networks (XPINNs) : A generalized space-time domain decomposition based deep learning framework for nonlinear partial differential equations - Tensorflow 2.0
 
 Recommended software versions: TensorFlow 2.8, Python 3.9
 
