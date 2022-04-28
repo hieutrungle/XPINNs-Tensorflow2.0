@@ -224,7 +224,7 @@ class XPINN(tf.keras.models.Model):
 
     @tf.function
     def train_step(self, ipnuts):
-        with tf.GradientTape(persistent=True) as tape:
+        with tf.GradientTape() as tape:
             loss_boundary, loss1, loss2, loss3 = self(ipnuts)
             loss = loss_boundary + loss1 + loss2 + loss3
 
@@ -343,7 +343,7 @@ def load_raw_data(filepath):
         'ub': ub,
     }
 
-    # Extract training data
+    # Extract solution data
     u_exact = np.transpose(np.array(data['u_exact']))
     u_exact2 = np.transpose(np.array(data['u_exact2']))
     u_exact3 = np.transpose(np.array(data['u_exact3']))
