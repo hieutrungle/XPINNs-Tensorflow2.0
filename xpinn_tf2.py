@@ -250,7 +250,9 @@ class XPINN(tf.keras.models.Model):
         )
 
 
-def train(model, inputs, training_config, X_star1, X_star2, X_star3, u_exact1, u_exact2, u_exact3):
+def train(model, train_inputs, training_config,
+          all_f1_coors, all_f2_coors, all_f3_coors,
+          u_exact, u_exact2, u_exact3):
 
     epochs = training_config["epochs"]
     start_epoch = training_config["start_epoch"]
@@ -262,7 +264,7 @@ def train(model, inputs, training_config, X_star1, X_star2, X_star3, u_exact1, u
 
     # Train model
     for epoch in range(start_epoch, end_epoch):
-        losses = model.train_step(inputs)
+        losses = model.train_step(train_inputs)
         loss_boundary = losses[0]
         loss1 = losses[1]
         loss2 = losses[2]
@@ -272,9 +274,9 @@ def train(model, inputs, training_config, X_star1, X_star2, X_star3, u_exact1, u
         # # Sub-Net1
         # u_pred1 = model.net_u1(X_star1)
         # Sub-Net2
-        u_pred2 = model.net_u2(X_star2)
+        u_pred2 = model.net_u2(all_f2_coors)
         # Sub-Net3
-        u_pred3 = model.net_u3(X_star3)
+        u_pred3 = model.net_u3(all_f3_coors)
 
         # l2_error1 = np.linalg.norm(
         #     u_exact1-u_pred1, 2)/np.linalg.norm(u_exact1, 2)
@@ -358,7 +360,8 @@ def load_raw_data(filepath):
     return residual_coors, interface_coors, boundary_coors, u_exacts, x_total, y_total
 
 
-def process_data(residual_coors, interface_coors, boundary_coors, N_f1, N_f2, N_f3, N_ub, N_i1, N_i2):
+def process_data(residual_coors, interface_coors, boundary_coors,
+                 N_f1, N_f2, N_f3, N_ub, N_i1, N_i2, fig_folder):
     # Load training data (boundary points), residual and interface points from .mat file
     # All points are generated in Matlab
 
@@ -426,8 +429,8 @@ def process_data(residual_coors, interface_coors, boundary_coors, N_f1, N_f2, N_
     idxi2 = np.random.choice(f2_interface_coors.shape[0], N_i2, replace=False)
     f2_interface_coors = f2_interface_coors[idxi2, :]
 
-    # utils.plot_data(f1_coors, f2_coors, f3_coors, f1_interface_coors,
-    #                 f2_interface_coors, b_coors)
+    utils.plot_data(f1_coors, f2_coors, f3_coors, f1_interface_coors,
+                    f2_interface_coors, b_coors, fig_folder)
 
     # Model inputs
     # Boundary data
@@ -485,12 +488,17 @@ def main():
     layers2 = [20, 20, 20, 20, 1]
     layers3 = [25, 25, 25, 1]
 
+    # Prepare figure folder
+    fig_folder = os.path.join(os.getcwd(), 'xpinn_tf2_figures')
+    utils.mkdir_if_not_exist(fig_folder)
+
     # Load data
     data_path = './DATA/XPINN_2D_PoissonEqn.mat'
     residual_coors, interface_coors, boundary_coors, u_exacts, \
         x_total, y_total = load_raw_data(data_path)
     train_inputs, all_f_coors = process_data(
-        residual_coors, interface_coors, boundary_coors, N_f1, N_f2, N_f3, N_ub, N_i1, N_i2)
+        residual_coors, interface_coors, boundary_coors,
+        N_f1, N_f2, N_f3, N_ub, N_i1, N_i2, fig_folder)
 
     all_f1_coors = all_f_coors['all_f1_coors']
     all_f2_coors = all_f_coors['all_f2_coors']
@@ -546,17 +554,12 @@ def main():
         u_exact)-u_pred.flatten(), 2)/np.linalg.norm(np.squeeze(u_exact), 2)
     print(f'\nError u_total: {error_u_total}\n')
 
-    # Prepare figure folder
-    fig_folder = os.path.join(os.getcwd(), 'xpinn_tf2_figures')
-    utils.mkdir_if_not_exist(fig_folder)
-
     # plot training process
     utils.plot_losses(training_config, all_losses, fig_folder)
     utils.plot_l2_error(training_config, all_l2_errors, fig_folder)
     utils.plot_results(
         u_exact, u_pred, all_f_coors, boundary_coors, interface_coors, fig_folder)
-
-    # plt.show()
+    plt.show()
 
 
 if __name__ == "__main__":
