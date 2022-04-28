@@ -2,7 +2,6 @@
 
 Recommended software versions: TensorFlow 2.8, Python 3.9
 
-
 **Setup**
 
 ```
@@ -15,11 +14,6 @@ $ pip install -r requirements.txt
 ```
 python xpinn_tf2.py
 ```
-
-References: For Domain Decomposition based PINN framework
-
-1. A.D.Jagtap, G.E.Karniadakis, Extended Physics-Informed Neural Networks (XPINNs): A Generalized Space-Time Domain Decomposition Based Deep Learning Framework for Nonlinear Partial Differential Equations, Commun. Comput. Phys., Vol.28, No.5, 2002-2041, 2020. (https://doi.org/10.4208/cicp.OA-2020-0164)
-
 
 **Contribution**
 
@@ -40,14 +34,18 @@ Results of XPINNS after training on Poisson Equation f = x + y.
 </p>
 
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/exact_solution.png" alt="exact solution" height="650" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/exact_solution.png" alt="exact solution" height="600" width="700"/>
 <div>
 <br />          
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/predicted_solution.png" alt="predicted solution" height="650" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/predicted_solution.png" alt="predicted solution" height="600" width="700"/>
 <div>
 <br />          
 <div align="center">
-<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/point_wise_error.png" alt="point-wise error" height="650" width="700"/>
+<img src="https://github.com/hieutrungle/XPINNs-Tensorflow2.0/blob/main/xpinn_tf2_figures/point_wise_error.png" alt="point-wise error" height="600" width="700"/>
 <div>
 
+
+**References**
+
+1. A.D.Jagtap, G.E.Karniadakis, Extended Physics-Informed Neural Networks (XPINNs): A Generalized Space-Time Domain Decomposition Based Deep Learning Framework for Nonlinear Partial Differential Equations, Commun. Comput. Phys., Vol.28, No.5, 2002-2041, 2020. (https://doi.org/10.4208/cicp.OA-2020-0164)
